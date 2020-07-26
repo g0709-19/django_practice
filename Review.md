@@ -89,3 +89,6 @@ path('', myapp.views.home, name="home")
 
 ### 입력받은 값
 > request.GET['<입력한 값>']
+
+### django 에서 CSS 적용하기
+blog.naver.com/shino1025/221320924962
