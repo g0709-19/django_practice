@@ -61,10 +61,12 @@ def home(request):
 내가 만든 html이 어떤 url을 입력했을 때 뜨게 할지 알려야 함
 
 ### url.py 에 추가
-path('', myapp.views.home, name="home")
-이름 정하는 이유: 함수이름이 바뀔 수도 있으므로
+> path('', myapp.views.home, name="home")
+
+**이름 정하는 이유: 함수이름이 바뀔 수도 있으므로**
 
 ## 템플릿 언어
+> https://docs.djangoproject.com/en/3.0/ref/templates/language/#templates
 
 ### 템플릿 변수
 > {{ python_value }}
@@ -102,8 +104,8 @@ path('', myapp.views.home, name="home")
 models.py
 
 ```
-class Designer(models.Model):
-    image = models.ImageField(upload_to = 'images/')
+class Designer(models.Model): # models.Model 을 상속
+    image = models.ImageField(upload_to = 'images/') # FileField + height + width
     name = models.CharField(max_length = 50)
     address = models.CharField(max_length = 255)
     description = models.TextField()
@@ -113,6 +115,13 @@ class Designer(models.Model):
         return self.name
 ```
 
+참고 사이트  
+> https://docs.djangoproject.com/en/3.0/ref/models/fields/
+> 
+
+### Pillow
+ImageField 사용하기 위한 패키지
+
 Terminal  
 > DB가 알아 듣도록 번역  
  python manage.py makemigrations
@@ -121,11 +130,12 @@ Terminal
 > 번역한 내용을 DB에 적용  
 python manage.py migrate
 
-### Pillow
-이미지 다루면서 사용하기 위한 패키지
+참고 사이트
+> https://nachwon.github.io/django-5-database/
 
 ## Admin 기능
-Terminal
+Terminal  
+**하기 전에 migrate 해야됨**
 > python manage.py createsuperuser
 
 admin.py
@@ -133,6 +143,9 @@ admin.py
 from .models import Designer
 admin.site.register(Designer)
 ```
+
+참고 사이트
+> https://docs.djangoproject.com/en/3.0/ref/contrib/admin/#modeladmin-objects
 
 ## QuerySet
 전달받은 모델의 객체 목록
@@ -143,8 +156,8 @@ from .models import Designer
 
 # QuerySet을 Templates로 보내는 예시
 def home(request):
-    desginers = Designer.objects.all()
-    return render(request, 'home.html', {'desginers': designers})
+    designers = Designer.objects.all()
+    return render(request, 'home.html', {'designers': designers})
 ```
 
 ## Detail Page
@@ -159,6 +172,10 @@ urls.py
 ```
 path('profile/<int:designer_id>/', views.detail, name="detail"),
 ```
+
+참고 사이트
+> https://docs.djangoproject.com/en/3.0/ref/urls/#django.urls.path
+
 Template
 > {% url 'detail' designer.id %}
 
