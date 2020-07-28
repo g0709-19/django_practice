@@ -90,5 +90,41 @@ path('', myapp.views.home, name="home")
 ### 입력받은 값
 > request.GET['<입력한 값>']
 
-### django 에서 CSS 적용하기
-blog.naver.com/shino1025/221320924962
+### django 에서 Static(CSS, Media, ...) 적용하기
+> https://nachwon.github.io/django-deploy-4-static/
+
+### Model 생성 & 적용 예시
+models.py
+
+```
+class Designer(models.Model):
+    image = models.ImageField(upload_to = 'images/')
+    name = models.CharField(max_length = 50)
+    address = models.CharField(max_length = 255)
+    description = models.TextField()
+
+    # Designer 대표하는 이름
+    def __str__(self):
+        return self.name
+```
+
+Terminal  
+> DB가 알아 듣도록 번역  
+ python manage.py makemigrations
+
+
+> 번역한 내용을 DB에 적용  
+python manage.py migrate
+
+### Pillow
+이미지 다루면서 사용하기 위한 패키지
+
+### Admin 기능
+Terminal
+> python manage.py createsuperuser
+
+admin.py
+```
+from .models import Designer
+admin.site.register(Designer)
+```
