@@ -64,6 +64,8 @@ def home(request):
 path('', myapp.views.home, name="home")
 이름 정하는 이유: 함수이름이 바뀔 수도 있으므로
 
+## 템플릿 언어
+
 ### 템플릿 변수
 > {{ python_value }}
 ### 템플릿 필터
@@ -93,6 +95,9 @@ path('', myapp.views.home, name="home")
 ### django 에서 Static(CSS, Media, ...) 적용하기
 > https://nachwon.github.io/django-deploy-4-static/
 
+## Model
+데이터에 접속하고 관리하도록 도와주는 객체(데이터베이스는 Django를 이해하지 못하기 때문)
+
 ### Model 생성 & 적용 예시
 models.py
 
@@ -119,7 +124,7 @@ python manage.py migrate
 ### Pillow
 이미지 다루면서 사용하기 위한 패키지
 
-### Admin 기능
+## Admin 기능
 Terminal
 > python manage.py createsuperuser
 
@@ -127,4 +132,45 @@ admin.py
 ```
 from .models import Designer
 admin.site.register(Designer)
+```
+
+## QuerySet
+전달받은 모델의 객체 목록
+
+```
+# Model의 존재 알려주기
+from .models import Designer
+
+# QuerySet을 Templates로 보내는 예시
+def home(request):
+    desginers = Designer.objects.all()
+    return render(request, 'home.html', {'desginers': designers})
+```
+
+## Detail Page
+
+### PK (Primary Key)
+Model을 통해 생성된 객체들을 구분할 수 있는 고유한 Key
+
+### Path Convertor
+여러 객체의 url를 계층적으로 다룰 수 있도록 도와주는 도구
+
+urls.py
+```
+path('profile/<int:designer_id>/', views.detail, name="detail"),
+```
+Template
+> {% url 'detail' designer.id %}
+
+### get_object_or_404
+Object를 가져오려 했는데 없을 경우 나타내는 에러  
+**views.py의 pk 변수명과 urls.py의 변수명은 같아야 함!**
+
+views.py
+```
+from django.shortcuts import render, get_object_or_404
+
+def detail(request, designer_id):
+    designer = get_object_or_404(Designer, pk = designer_id)
+    return render(request, 'detail.html', {'designer': designer})
 ```
