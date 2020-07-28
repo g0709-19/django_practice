@@ -97,6 +97,8 @@ def home(request):
 ### django 에서 Static(CSS, Media, ...) 적용하기
 > https://nachwon.github.io/django-deploy-4-static/
 
+> https://crynut84.github.io/2016/11/14/django-static-file/
+
 ## Model
 데이터에 접속하고 관리하도록 도와주는 객체(데이터베이스는 Django를 이해하지 못하기 때문)
 
