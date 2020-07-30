@@ -193,3 +193,43 @@ def detail(request, designer_id):
     designer = get_object_or_404(Designer, pk = designer_id)
     return render(request, 'detail.html', {'designer': designer})
 ```
+
+## URL Include
+App 별로 URL을 관리할 수 있도록 구조화
+
+App 폴더 내에 urls.py 생성 후
+```
+from django.urls import path
+from . import views # 앱 안에 있기 때문에 . 으로 해도 됨, 밖에 있을 경우 앱 이름
+
+urlpatterns = [ ~~~ ]
+```
+
+Project/urls.py
+```
+from django.urls import path, include
+
+urlpatterns = [
+    path('url/', include('app이름.urls'))
+]
+```
+
+Cinema/urls.py
+```
+path('movie/', include('Movie.urls')),
+path('user/', include('User.urls')),
+```
+
+Movie/urls.py
+```
+path('', views.introduce, ~~~),
+```
+
+## Template 상속
+Base.html 에 중복 코드 넣어두고 붙여넣기  
+**프로젝트 폴더, 앱 폴더 어디에 둬도 상관 없음(장고가 프로젝트, 앱을 모두 찾아보기 때문)**
+
+> {% extends 'base.html' %}
+
+> {% block 이름 %} {% endblock %}
+
