@@ -233,3 +233,58 @@ Base.html 에 중복 코드 넣어두고 붙여넣기
 
 > {% block 이름 %} {% endblock %}
 
+## CRUD
+**C**reate, **R**ead, **U**pdate, **D**elete  
+**참고! HTTP Method, RESTful**
+
+### GET / POST
+||GET|POST|
+|:---:|:---:|:---:|
+|Data|URL에 포함|Body에 포함|
+|전송 길이|제약 O|제약 X|
+|Caching|가능|불가능|
+|비고|READ 에서 활용|CREATE/UPDATE 에서 활용|
+
+### Create
+객체 생성
+```
+if request.method == 'POST':
+    post = Designer()
+```
+입력 Data 저장
+```
+post.name = request.POST['name']
+post.address = request.POST['address']
+...
+```
+입력 Data 저장
+```
+post.save()
+```
+
+### Update
+객체 탐색
+```
+post = get_object_or_404(Designer, pk=designer_id)
+if request.method == 'POST':
+```
+**입력 Data 저장은 Create 와 동일**
+
+### Delete
+**객체 탐색은 Update 와 동일**  
+객체 삭제
+```
+post.delete()
+```
+Home으로 이동
+```
+from django.shortcuts import redirect
+return redirect('home')
+```
+
+**enctype, csrf_token 은 구글에서 참고**
+
+### Render, Redirect(URL path name, PK) 차이
+|Render|Redirect|
+|:---:|:---:|
+|request와 함께 무언가 반환(view -> templates)|주소로 이동만|
