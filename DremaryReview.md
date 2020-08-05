@@ -125,11 +125,11 @@ class Designer(models.Model): # models.Model 을 상속
 ImageField 사용하기 위한 패키지
 
 Terminal  
-> DB가 알아 듣도록 번역  
+> DB가 알아 듣도록 번역(migrations 폴더에 파일들 생성)
  python manage.py makemigrations
 
 
-> 번역한 내용을 DB에 적용  
+> 번역한 내용을 DB에 적용(migrations 폴더 안의 파일들 적용)
 python manage.py migrate
 
 참고 사이트
