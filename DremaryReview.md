@@ -95,6 +95,10 @@ def home(request):
 > request.GET['<입력한 값>']
 
 ### django 에서 Static(CSS, Media, ...) 적용하기
+1. link 태그 이용하여 {% static 'css/이름.css' %} 추가
+2. 상단에 {% load static %} 추가
+3. settings.py 에서 STATIC_ROOT = os.path.join(BASE_DIR, 'static') 추가
+
 > https://nachwon.github.io/django-deploy-4-static/
 
 > https://crynut84.github.io/2016/11/14/django-static-file/
