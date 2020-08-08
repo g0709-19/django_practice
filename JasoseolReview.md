@@ -33,3 +33,22 @@
 #### html 에서 form 불러온 뒤 .as_p 하면 p태그로 감쌈
 #### form 태그 action 비워주면 해당 페이지의 url 실행
 
+### Primary Key
+오브젝트를 식별할 수 있는 값, 중복될 수 없는 단일 값
+```
+my_pk = models.IntegerField(primary_key=True)
+```
+
+### Form(instance=오브젝트) # 오브젝트 가리키는 폼
+### Form(request.POST) # POST 로 받아온 내용 포함해서 폼 생성
+### Form(request.POST, instance=오브젝트) # 오브젝트 가리키는 폼에 POST 로 받아온 내용 포함
+
+### 없는 오브젝트 참조 시
+```
+from django.http import Http404
+
+try:
+    # getObject
+except:
+    raise Http404
+```

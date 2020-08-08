@@ -18,13 +18,17 @@
     </div>
 
     {% for item in jss %}
+    <a href="{% url 'detail' item.id %}">
     <div class="all_jss">
+        <p>{{item.id}}</p>
+
         <p>{{item.title}}</p>
 
         <p>{{item.content}}</p>
 
         <p>{{item.updated_at|date:"Y-m-d"}}</p>
     </div>
+    </a>
     {% endfor %}
 </body>
 </html>
