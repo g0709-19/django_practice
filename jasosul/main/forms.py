@@ -4,7 +4,7 @@ from .models import Jasoseol
 class JssForm(forms.ModelForm):
     class Meta:
         model = Jasoseol # 어떤 모델과 대응될 지
-        fields = ('title', 'content', ) # 모델을 대응시키는 폼을 만들 때 어떤 것들만 만들 지
+        fields = ('title', 'content',) # 모델을 대응시키는 폼을 만들 때 어떤 것들만 만들 지
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

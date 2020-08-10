@@ -1,8 +1,8 @@
 # 자소설닷컴 정리
 멋쟁이사자처럼 자소설닷컴 강의 내용 정리
 
-## Model & DB
-### Field
+# Model & DB
+## Field
 |||
 |---|---|
 | Primary Key | AutoField |
@@ -23,7 +23,7 @@
 
 **rem == 기본 정의된 사이즈의 배수**
 
-### ModelForm
+## ModelForm
 * 모델에 대응하는 html폼을 만들어 줌
 * 데이터를 생성하거나 업데이트가 간편
 * 폼을 다루는 법을 배워야 함
@@ -49,7 +49,7 @@ class JssForm(forms.ModelForm):
         })
 ```
 
-### Primary Key
+## Primary Key
 오브젝트를 식별할 수 있는 값, 중복될 수 없는 단일 값
 ```
 my_pk = models.IntegerField(primary_key=True)
@@ -69,7 +69,7 @@ except:
     raise Http404
 ```
 
-### UserModelForm
+## UserModelForm
 ```
 # 회원가입 폼
 from django.contrib.auth.forms import UserCreationForm
@@ -90,3 +90,38 @@ LoginView.as_view() # urls.py 에서 사용시 as_view 필수(클래스기 때�
 
 ### Override
 views.py 에서 클래스 생성 후 LoginView 상속
+
+## ForeignKey
+어떤 모델의 객체와 다른 모델의 객체의 일대다 대응 관계를 형성하는 기능
+```
+# 연결된 모델이 삭제되면 같이 삭제되도록 연결
+author = models.ForeignKey(<Model>, on_delete=models.CASCADE, null=True)
+```
+#### null=True 없이 makemigrations 하면 오류! 이미 있던 객체들의 author 의 기본값 설정 방식을 제시하지 않았기 때문(default=<계정이름> 도 가능)
+
+### 객체 저장 지연
+```
+temp_form = filled_form.save(commit=False) # 객체 저장 지연
+temp_form.author = request.user # user 정보 대입
+temp_form.save() # 객체 저장
+```
+
+### 접근 제한 페이지
+```
+from django.core.exceptions import PermissionDenied
+raise PermissionDenied
+```
+
+### login_required
+```
+# 로그인 필요시 login_url로 이동
+from django.contrib.auth.decorators import login_required
+@login_required(login_url='')
+def ~~~
+```
+
+### objects.filter
+```
+# Jasoseol 모델의 author 필드가 request.user 인 객체만 필터링
+my_jss = Jasoseol.objects.filter(author=request.user)
+```
