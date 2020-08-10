@@ -1,34 +1,55 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자소설 닷컴</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 </head>
+
 <body>
+    {% if user.is_authenticated %}
+
+    <a href="{% url 'logout' %}">
+        <button>로그아웃</button>
+    </a>
+    <p>안녕하세요, {{ user }}님!</p>
+
+    {% else %}
+
+    <a href="{% url 'signup' %}">
+        <button>회원가입</button>
+    </a>
+    <a href="{% url 'login' %}">
+        <button>로그인</button>
+    </a>
+    
+    {% endif %}
+
     <div class="make_jss">
         <a href="{% url 'create' %}">
-        <div class="plus_btn">
-            +
-        </div>
+            <div class="plus_btn">
+                +
+            </div>
         </a>
         <p>자기소개서 작성</p>
     </div>
 
     {% for item in jss %}
     <a href="{% url 'detail' item.id %}">
-    <div class="all_jss">
-        <p>{{item.id}}</p>
+        <div class="all_jss">
+            <p>{{item.id}}</p>
 
-        <p>{{item.title}}</p>
+            <p>{{item.title}}</p>
 
-        <p>{{item.content}}</p>
+            <p>{{item.content}}</p>
 
-        <p>{{item.updated_at|date:"Y-m-d"}}</p>
-    </div>
+            <p>{{item.updated_at|date:"Y-m-d"}}</p>
+        </div>
     </a>
     {% endfor %}
 </body>
+
 </html>

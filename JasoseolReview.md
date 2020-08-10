@@ -33,6 +33,22 @@
 #### html 에서 form 불러온 뒤 .as_p 하면 p태그로 감쌈
 #### form 태그 action 비워주면 해당 페이지의 url 실행
 
+```
+class JssForm(forms.ModelForm):
+    class Meta:
+        model = Jasoseol # 어떤 모델과 대응될 지
+        fields = ('title', 'content', ) # 모델을 대응시키는 폼을 만들 때 어떤 것들만 만들 지
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].label = '제목'
+        self.fields['content'].label = '자기소개서 내용'
+        self.fields['title'].widget.attrs.update({
+            'class': 'jss_title',
+            'placeholder': '제목',
+        })
+```
+
 ### Primary Key
 오브젝트를 식별할 수 있는 값, 중복될 수 없는 단일 값
 ```
@@ -48,7 +64,29 @@ my_pk = models.IntegerField(primary_key=True)
 from django.http import Http404
 
 try:
-    # getObject
+    <Model>.objects.get(pk=<PK>)
 except:
     raise Http404
 ```
+
+### UserModelForm
+```
+# 회원가입 폼
+from django.contrib.auth.forms import UserCreationForm
+UserCreationForm()
+```
+form action 값 없으면 그 페이지를 렌더링시킨 함수를 사용
+
+```
+from django.contrib.auth.views import LoginView
+LoginView.as_view() # urls.py 에서 사용시 as_view 필수(클래스기 때문)
+```
+
+#### templates/registration/login.html 추가
+#### {{ form }} 로그인 폼
+#### LOGIN_REDIRECT_URL -> setting.py
+#### {{ user }} 유저 확인, 없으면 AnonymousUser
+#### {{ user.is_authenticated }} 로그인 확인
+
+### Override
+views.py 에서 클래스 생성 후 LoginView 상속
