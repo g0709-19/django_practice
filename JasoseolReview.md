@@ -12,6 +12,19 @@
 | 참/거짓 | BooleanField, NullBooleanField |
 | 파일 | FieldField, ImageField, FilePathField |
 
+### DateTimeField
+자동으로 현재 시간
+> auto_now=True
+
+템플릿 필터
+> date:"Y-m-d"
+
+settings.py
+```
+LANGUAGE_CODE = 'ko-KR'
+TIME_ZONE = 'Asia/Seoul'
+```
+
 ### display flex
 요소 컨트롤 가능
 
@@ -29,6 +42,7 @@
 * 폼을 다루는 법을 배워야 함
 
 #### 앱 폴더 내에 forms.py 생성
+#### from django import forms
 #### views.py 에서 from .forms import Form
 #### html 에서 form 불러온 뒤 .as_p 하면 p태그로 감쌈
 #### form 태그 action 비워주면 해당 페이지의 url 실행
@@ -55,9 +69,9 @@ class JssForm(forms.ModelForm):
 my_pk = models.IntegerField(primary_key=True)
 ```
 
-### Form(instance=오브젝트) # 오브젝트 가리키는 폼
-### Form(request.POST) # POST 로 받아온 내용 포함해서 폼 생성
-### Form(request.POST, instance=오브젝트) # 오브젝트 가리키는 폼에 POST 로 받아온 내용 포함
+#### Form(instance=오브젝트) # 오브젝트 가리키는 폼
+#### Form(request.POST) # POST 로 받아온 내용 포함해서 폼 생성
+#### Form(request.POST, instance=오브젝트) # 오브젝트 가리키는 폼에 POST 로 받아온 내용 포함
 
 ### 없는 오브젝트 참조 시
 ```
