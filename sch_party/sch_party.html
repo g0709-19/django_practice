@@ -1,0 +1,164 @@
+<!-- 
+    멋쟁이 사자처럼과는 아무런 관계도 없지만
+    따로 레파지토리 파는 것도 애매해서
+    이 곳에 올립니다...
+ -->
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대면수업 조 확인</title>
+    <style>
+        .box {
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        .description {
+            width: 600px;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mini_box {
+            margin: 30px;
+        }
+
+        .notice,
+        table {
+            width: 500px;
+        }
+
+        table {
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-size: 15px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            margin: 5px;
+        }
+
+        h2, h3 {
+            color: red;
+        }
+
+        h3 {
+            font-size: 20px;
+        }
+
+        #studentId, button {
+            width: 300px;
+            height: 30px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function printResult() {
+            var id = document.getElementById("studentId").value;
+            var result;
+            if (id % 3 == 0) {
+                result = "학생은 A조 입니다.";
+            }
+            else if (id % 3 == 1) {
+                result = "학생은 B조 입니다.";
+            }
+            else {
+                result = "학생은 C조 입니다.";
+            }
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <h1>순천향대학교</h1>
+        <h1>2020-2학기 대면수업 조 확인</h1>
+        <div class="description">
+            <div class="mini_box">
+                <div class="notice">
+                    <p>
+                        ■ 수업운영방법
+                        <br>
+                        ○ 사회적 거리두기 1,2단계 유지를 전제로 진행
+                        <br>
+                        - 사회적 거리두기 3단계 상향조정 시 : 전면 원격수업
+                        <br>
+                        - 일상복귀 전환 시 : 전면 대면수업
+                        <br>
+                        ① 교양은 원격수업으로 진행
+                        <br>
+                        ② 전공은 대면수업 원칙,
+                        <br>
+                        대면강의 필요성을 판단하여
+                        <br>
+                        ⓐ 조별 대면수업
+                        <br>
+                        ⓑ 전면 대면수업 으로 나누어 진행
+                        <br>
+                        A조 : 학번을 3으로 나눈 나머지가 0
+                        <br>
+                        조별대면수업(ⓐ) 1-4주 등교
+                        <br>
+                        B조 : 학번을 3으로 나눈 나머지가 1
+                        <br>
+                        조별대면수업(ⓐ) 6-9주 등교
+                        <br>
+                        C조 : 학번을 3으로 나눈 나머지가 2
+                        <br>
+                        조별대면수업(ⓐ) 11-14주 등교
+                        <br>
+                        ※ 5주, 10주는 기숙사 및 강의실 방역작업
+                        실시로 전체 원격
+                    </p>
+                </div>
+                <table border="1">
+                    <th>수업</th>
+                    <th>1-4주</th>
+                    <th>5주</th>
+                    <th>6-9주</th>
+                    <th>10주</th>
+                    <th>11-14주</th>
+                    <th>15(16)주</th>
+                    <tr>
+                        <td>ⓐ</td>
+                        <td>A</td>
+                        <td>원격</td>
+                        <td>B</td>
+                        <td>원격</td>
+                        <td>C</td>
+                        <td>기말고사</td>
+                    </tr>
+                    <tr>
+                        <td>ⓑ</td>
+                        <td>A,B,C</td>
+                        <td>원격</td>
+                        <td>A,B,C</td>
+                        <td>원격</td>
+                        <td>A,B,C</td>
+                        <td>기말고사</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h2>↓↓↓↓↓ 대면수업 등교 조 확인 ↓↓↓↓↓</h2>
+        <input type="text" id="studentId">
+        <button onclick="printResult()">대면수업 등교 조 확인</button>
+        <h3><span id="result"></span></h3>
+
+    </div>
+
+</body>
+
+</html>
