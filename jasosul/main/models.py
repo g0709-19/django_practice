@@ -11,3 +11,8 @@ class Jasoseol(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    content = models.CharField(max_length=100)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    jasoseol = models.ForeignKey(Jasoseol, on_delete=models.CASCADE, related_name='comments')

@@ -37,7 +37,7 @@ TIME_ZONE = 'Asia/Seoul'
 **rem == 기본 정의된 사이즈의 배수**
 
 ## ModelForm
-* 모델에 대응하는 html폼을 만들어 줌
+* 모델에 대응하는 html폼(block)을 만들어 줌
 * 데이터를 생성하거나 업데이트가 간편
 * 폼을 다루는 법을 배워야 함
 
@@ -138,4 +138,33 @@ def ~~~
 ```
 # Jasoseol 모델의 author 필드가 request.user 인 객체만 필터링
 my_jss = Jasoseol.objects.filter(author=request.user)
+```
+
+## ORM
+* 객체(Object)와 관계형 데이터베이스(Relational Database)의 데이터를 매핑(Mapping)해주는 것
+* 객체 간의 관계를 바탕으로 SQL을 자동으로 생성해서 SQL 쿼리문 없이도 데이터베이스의 데이터들을 다룰 수 있음
+
+<a href="https://fabl1106.github.io/django/2019/05/27/Django-26.-%EC%9E%A5%EA%B3%A0-related_name-%EC%84%A4%EC%A0%95%EB%B0%A9%EB%B2%95.html">참고</a>
+
+models.py
+```
+    models.ForeignField(<Model>, on_delete=models.~~~, related_name='<Name>')
+```
+
+template
+```
+    <Model>.<Name>.all
+```
+
+## Javascript
+script src="{% url 'js/count.js' %}"
+
+### 요소 선택
+```
+querySelector(<selector>)
+```
+
+### 이벤트 핸들러
+```
+<Element>.addEventListener("<Event>", <Function>)
 ```
