@@ -11,6 +11,7 @@ var celsius = kelvin => {
     return kelvin - 273.15;
 }
 
+// 자바스크립트 GET 구현
 var getParameters = function (paramName) {
     // 리턴값을 위한 변수 선언
     var returnValue;
@@ -113,5 +114,8 @@ var createMap = function (id, lat, lon, _level) {
 
 // 지도 생성
 map = createMap('map', lat, lon, 3);
+
+// 장소 검색
 keyword = getParameters('place');
-searchPlace(keyword);
+if (keyword != undefined)
+    searchPlace(keyword);
