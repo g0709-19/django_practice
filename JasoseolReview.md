@@ -69,7 +69,7 @@ class JssForm(forms.ModelForm):
 my_pk = models.IntegerField(primary_key=True)
 ```
 
-#### Form(instance=오브젝트) # 오브젝트 가리키는 폼
+#### Form(instance=오브젝트) # 오브젝트 가리키는 폼, update 에서 쓰임
 #### Form(request.POST) # POST 로 받아온 내용 포함해서 폼 생성
 #### Form(request.POST, instance=오브젝트) # 오브젝트 가리키는 폼에 POST 로 받아온 내용 포함
 
