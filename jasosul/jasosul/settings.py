@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.path.join(BASE_DIR, 'secrets.json')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.path.join(BASE_DIR, 'secrets.json')
 
 ALLOWED_HOSTS = []
 
