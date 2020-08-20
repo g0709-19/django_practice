@@ -32,22 +32,11 @@ var getParameters = function (paramName) {
     }
 };
 
-// 좌표로부터 날씨 정보 가져옴
+// 좌표로부터 날씨 정보 가져옴(with Fetch API)
 function getWeatherFromCoord(lat, lon) {
-    var result = "";
-    $.ajax({
-    url: `//api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${appid}`,
-    type: "GET",
-    async: false, // 동기로 바꿔주면서 리턴값 얻음
-    success: function (data) {
-        if (data) {
-            result = data;
-        } else {
-            alert("불러오기 실패");
-        }
-    }
-    });
-    return result;
+    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${appid}`;
+    return fetch(url)
+        .then(response => response.json());
 };
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
@@ -87,7 +76,11 @@ function displayMarker(place) {
             infowindow.close();
         } else {
             var weather_info = getWeatherFromCoord(place.y, place.x);
-            infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + `: ${Math.floor(celsius(weather_info.main.temp))}ºC` + '</div>');
+            weather_info.then(json => {
+            infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + `: ${Math.floor(celsius(
+                json.main.temp
+                ))}ºC` + '</div>');
+            });
             infowindow.open(map, marker);
         }
     });
@@ -111,6 +104,16 @@ var createMap = function (id, lat, lon, _level) {
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
     return map;
 }
+
+function TestFunction() {
+    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${appid}`;
+    return fetch(url)
+    .then(response => response.json())
+    .then(my_json => { return JSON.stringify(my_json); });
+}
+
+var weather_info = TestFunction();
+weather_info.then(json => console.log(JSON.parse(json)));
 
 // 지도 생성
 map = createMap('map', lat, lon, 3);
