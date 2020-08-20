@@ -77,11 +77,15 @@ Representational State Transfer
 * Fake online REST API
 * REST API를 테스트, 프로토타이핑
 
+<br>
+
 ## URL
 * 프로토콜: http, https, ftp 등
 * 호스트주소: www.google.com
 * 파일경로: /index.html
 * Query parameter: ?id=1&postid=1(검색, 필터링, 데이터 교환 시 사용)
+
+<br>
 
 ## Postman
 ### GET
@@ -90,3 +94,74 @@ id는 unique 해야 돼서 값을 줘도 적용이 안 됨
 ### PUT
 ### PATCH
 ### DELETE
+
+<br>
+
+## 비동기 처리
+### Promise 객체
+* 대기
+* 이행
+* 거부
+
+### 패턴
+async, await 키워드 활용
+```
+async function asyncFunction() {
+    await [Promise객체]
+}
+```
+
+```
+[Promise 객체]
+.then(콜백함수)
+.then(콜백함수)
+.catch(콜백함수)
+```
+
+사용 예
+```
+let promiseObj = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('안녕하세요');
+    }, timer);
+});
+
+promiseObj.then((value) => console.log(value));
+```
+
+<br>
+
+## Fetch API
+네트워크 통신을 위해서 제공되는 API  
+반환: Promise 객체  
+Request, Response 객체 사용
+
+사용 예(GET)
+```
+const url = '';
+fetch(url)
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+사용 예(POST)
+```
+let newPost = {
+    title: 'foo',
+    body: 'bar',
+    userid: 1
+};
+
+const url = '';
+fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(newPost),
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+})
+    .then(response => {
+        console.log('response 타입: " + typeof(response));
+        return response.json();
+    });
+```
